@@ -4,7 +4,7 @@
 
 Node.js & MySQL activity creating an Amazon-like storefront. The app takes in orders from customers and deplete stock from the store's inventory.
 
-### Features
+### Bamazon MySQL table
 
 The Bamazon MySQL products table contains the following columns:
 
