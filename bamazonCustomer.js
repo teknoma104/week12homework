@@ -112,7 +112,7 @@ function buyScreen() {
                 // console.log("Customer's desired quantity:  " + quantityPurchased + "\n");
 
                 if ((stock - quantityPurchased) > 0) {
-                    console.log("We are able to fulfill your order.");
+                    console.log("\nWe are able to fulfill your order.\n");
 
                     var newStockQuantity = stock - quantityPurchased;
 
