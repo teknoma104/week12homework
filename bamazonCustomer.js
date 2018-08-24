@@ -5,6 +5,8 @@ var inquirer = require("inquirer");
 // array variable to store all of the item names
 var productArray = [];
 
+
+
 // create the connection information for the sql database
 var connection = mysql.createConnection({
     host: "localhost",
@@ -88,6 +90,8 @@ function buyScreen() {
         .then(function (answer) {
             var productName = answer.item;
             var quantityPurchased = answer.quantityPurchase;
+
+
             var query = "SELECT * FROM products WHERE ?"
 
             // console.log(answer);
@@ -101,6 +105,8 @@ function buyScreen() {
                 if (err) throw err;
 
                 var stock = res[0].stock_quantity;
+                var productPrice = res[0].price;
+                var total = productPrice * quantityPurchased;
 
                 // console.log("Current stock at: " + stock);
                 // console.log("Customer's desired quantity:  " + quantityPurchased + "\n");
@@ -109,6 +115,9 @@ function buyScreen() {
                     console.log("We are able to fulfill your order.");
 
                     var newStockQuantity = stock - quantityPurchased;
+
+                    console.log("Your purchase order:");
+                    console.log(productName + " ($" + productPrice + ") x " + quantityPurchased + " = $" + total);
                     updateProduct(productName, newStockQuantity);
                 } else {
                     console.log("Sorry, we do not have enough stock in our inventory to fulfill your order.");
@@ -122,8 +131,8 @@ function buyScreen() {
 
 function updateProduct(productName, stock) {
     console.log("\nUpdating Bamazon products DB with customer order quantity...\n");
-    
-    // connection query to update the stock quantity in the bamazon's product db
+
+    // connection query to update the stock quantity in the bamazon's products db
     var query = connection.query(
         "UPDATE products SET ? WHERE ?",
         [
