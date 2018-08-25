@@ -39,7 +39,7 @@ function start() {
 
         for (var x = 0; x < results.length; x++) {
             console.log("ID#: " + results[x].item_id + ", '" + results[x].product_name + "', Price: $" + results[x].price);
-            productArray.push(results[x].product_name);
+            productArray.push("ID#:" + results[x].item_id + ", " + results[x].product_name);
         }
 
         console.log("");
@@ -84,19 +84,24 @@ function buyScreen() {
             }
         ])
         .then(function (answer) {
-            var productName = answer.item;
             var quantityPurchased = answer.quantityPurchase;
 
-            var query = "SELECT * FROM products WHERE ?"
+            var query = "SELECT * FROM products WHERE ?";
+
+            // doing some splitting to get the item ID# from the choices from the above inquirer list prompt
+            var split1 = answer.item.split(",", 1);
+            var split2 = split1[0].split(":", 2);
+            var final = split2[1];
 
             console.log("Confirming your order..");
 
             // connection query using mysql select searching in the bamazon product db for the row matching the product name the person wants and checking the quantity
             // if when the test for the current stock minus the customer's desired quantity to purchase is less than 0, display an message saying unable to fulfill order
             // otherwise if the test condition comes out positive, confirm to user that bamazon can fulfill the order then call updateProduct function while passing the product name and desired quantity to purchase as parameters
-            connection.query(query, { product_name: productName }, function (err, res) {
+            connection.query(query, { item_id: final }, function (err, res) {
                 if (err) throw err;
 
+                var productName = res[0].product_name;
                 var stock = res[0].stock_quantity;
                 var productPrice = res[0].price;
                 var total = productPrice * quantityPurchased;
@@ -135,7 +140,7 @@ function updateProduct(productName, stock) {
             }
         ],
         function (err, res) {
-            console.log(res.affectedRows + " products updated!\n");
+            console.log(res.affectedRows + " product(s) updated!\n");
             connection.end();
         }
     );

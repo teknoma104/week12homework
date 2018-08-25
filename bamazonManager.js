@@ -26,7 +26,7 @@ var connection = mysql.createConnection({
 connection.connect(function (err) {
     if (err) throw err;
 
-    console.log("==============================================n");
+    console.log("==============================================");
     console.log("=========  Welcome Bamazon Manager!  =========");
     console.log("==============================================\n");
 
@@ -58,7 +58,6 @@ function managerStart() {
                 message: "What would you like to do at this time?"
             })
             .then(function (answer) {
-                // console.log(answer);
 
                 var choice = answer.managerActions;
 
@@ -106,7 +105,6 @@ function viewLowInventory() {
         function (err, res) {
             if (err) throw err;
 
-            // console.log(res);
 
             for (var x = 0; x < res.length; x++) {
                 console.log("ID#: " + res[x].item_id + ", '" + res[x].product_name + "', Current Stock: " + res[x].stock_quantity);
@@ -148,23 +146,14 @@ function addInventory() {
 
             // doing some splitting to get the item ID# from the choices from the above inquirer list prompt
             var split1 = answer.itemlist.split(",", 1);
-            console.log("split1:  " + split1);
-
-
             var split2 = split1[0].split(":", 2);
-            console.log("split2:  " + split2);
-
             var final = split2[1];
-            console.log("final:  " + final);
 
             connection.query("SELECT item_id, product_name, price, stock_quantity FROM products WHERE item_id = ?", [final], function (err, results) {
                 if (err) throw err;
 
-                console.log(results);
-
                 // parseInt to parse the string as integers
                 newStockTotal = (parseInt(results[0].stock_quantity) + parseInt(answer.quantityAdded));
-                console.log("newStockTotal:  " + newStockTotal);
 
                 updateDatabase(final, newStockTotal, results[0].product_name);
             });
@@ -268,7 +257,6 @@ function updateDatabase(itemID, newStockTotal, name) {
             if (err) throw err;
 
             console.log(name + "'s new stock quantity:  " + newStockTotal + "\n");
-            // console.log(res.affectedRows + " product(s) updated!\n");
 
             managerStart();
         }
