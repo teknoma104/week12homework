@@ -14,6 +14,13 @@ The Bamazon MySQL products table contains the following columns:
    * price
    * stock_quantity
 
+### NPM Packages Required
+
+The following NPM packages are needed for this app to run properly:
+
+    * MySQL
+    * Inquirer
+
 ### App Functionality Explained
 
 * The products table is already populated with 10 rows of randomly generated data for each of the data fields
@@ -41,23 +48,23 @@ The Bamazon MySQL products table contains the following columns:
 * bamazonManager.js
     * This is from the manager's point of view.
     * When you run this app it will first prompt the manager asking what they would like to do. Possible actions below:
-        ![bamazonManager.js - manager initial menu](/screenshots/bamazonManager/bamazonManager - 1 - initial menu.png)
+        ![bamazonManager.js - manager initial menu](/screenshots/bamazonManager/bamazonManager_-_1_-_initial_menu.png)
         * View Products for Sale
             * Description:  Simply displays all products available in the products database. Displays the following attribute below:
                 * item_id
                 * product_name
                 * price
                 * stock_quantity
-            ![bamazonManager.js - view products for sale](/screenshots/bamazonManager/bamazonManager - 2 - view products for sale.png)
+            ![bamazonManager.js - view products for sale](/screenshots/bamazonManager/bamazonManager_-_2_-_view_products_for_sale.png)
         * View Low Inventory
             * Description:  Displays products that have stock quantity below a certain threshold (here it is 100 because there are many products with more than 500+ stock)
-            ![bamazonManager.js - viewing products with low inventory](/screenshots/bamazonManager/bamazonManager - 3 - view products with low inventory.png)
+            ![bamazonManager.js - viewing products with low inventory](/screenshots/bamazonManager/bamazonManager_-_3_-_view_products_with_low_inventory.png)
         * Add to Inventory
             * Description:  Allows the manager to add more stock to a product. It will ask the manager to select the product from a list then ask how much stock to add to it.
-            ![bamazonManager.js - selecting option to add stock to an exisitng product](/screenshots/bamazonManager/bamazonManager - 4 - add stock to existing product.png)
-            ![bamazonManager.js - entering stock quantity to add on top of existing stock](/screenshots/bamazonManager/bamazonManager - 5 - entering quantity for stock.png)
-            ![bamazonManager.js - successfully added stock](/screenshots/bamazonManager/bamazonManager - 6 - successfully added stock.png)
+            ![bamazonManager.js - selecting option to add stock to an exisitng product](/screenshots/bamazonManager/bamazonManager_-_4_-_add_stock_to_existing_product.png)
+            ![bamazonManager.js - entering stock quantity to add on top of existing stock](/screenshots/bamazonManager/bamazonManager_-_5_-_entering_quantity_for_stock.png)
+            ![bamazonManager.js - successfully added stock](/screenshots/bamazonManager/bamazonManager_-_6_-_successfully_added_stock.png)
 
         * Add New Product
             * Description:  Allows the manager to add a new product into the products database
-            ![bamazonManager.js - adding brand new product to products database](/screenshots/bamazonManager/bamazonManager - 7 - adding new product to products db.png)
+            ![bamazonManager.js - adding brand new product to products database](/screenshots/bamazonManager/bamazonManager_-_7_-_adding_new_product_to_products_db.png)
