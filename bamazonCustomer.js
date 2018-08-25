@@ -37,9 +37,6 @@ function start() {
     connection.query("SELECT item_id, product_name, price FROM products", function (err, results) {
         if (err) throw err;
 
-        // console.log(results.length);
-        // console.log(results);
-
         for (var x = 0; x < results.length; x++) {
             console.log("ID#: " + results[x].item_id + ", '" + results[x].product_name + "', Price: $" + results[x].price);
             productArray.push(results[x].product_name);
@@ -55,7 +52,6 @@ function start() {
                 message: "Would you like to buy something from Bamazon at this time?"
             })
             .then(function (answer) {
-                // console.log(answer);
 
                 // based on their answer, either call buyScreen() function or display message thanking user + ending mysql db connection
                 if (answer.buyOrNot === true) {
@@ -91,10 +87,7 @@ function buyScreen() {
             var productName = answer.item;
             var quantityPurchased = answer.quantityPurchase;
 
-
             var query = "SELECT * FROM products WHERE ?"
-
-            // console.log(answer);
 
             console.log("Confirming your order..");
 
@@ -108,12 +101,10 @@ function buyScreen() {
                 var productPrice = res[0].price;
                 var total = productPrice * quantityPurchased;
 
-                // console.log("Current stock at: " + stock);
-                // console.log("Customer's desired quantity:  " + quantityPurchased + "\n");
-
                 if ((stock - quantityPurchased) > 0) {
                     console.log("\nWe are able to fulfill your order.\n");
 
+                    // New stock quantity after subtracting the user's current order
                     var newStockQuantity = stock - quantityPurchased;
 
                     console.log("Your purchase order:");
@@ -148,6 +139,4 @@ function updateProduct(productName, stock) {
             connection.end();
         }
     );
-    // logs the actual query being run
-    // console.log(query.sql);
 }
